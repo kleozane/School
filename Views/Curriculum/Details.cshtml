@@ -1,0 +1,52 @@
+﻿@model School.Models.Curriculum
+
+@{
+    ViewData["Title"] = "Detajet";
+}
+
+<h1>Detajet e @Model.Name</h1>
+
+<div>
+    <h4>Kurrikula</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Emri
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Name
+        </dd>
+        <dt class="col-sm-2">
+            Pershkrimi
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Description
+        </dd>
+        <dt class="col-sm-2">
+            Javet
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Weeks jave
+        </dd>
+        <dt class="col-sm-2">
+            Oret
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Hours ore
+        </dd>
+        <dt class="col-sm-2">
+            Lendet
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var s in Model.Subjects)
+            {
+                <p>@s.Name</p>
+            }
+            
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
