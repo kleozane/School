@@ -97,10 +97,20 @@ namespace School.Controllers
             var curriculum = await _context.Curriculums.FindAsync(id);
             if (curriculum != null)
             {
+                var subjectsInCurriculum = _context.Subjects.Where(s => s.CurriculumId == curriculum.Id).ToList();
+
+                foreach (var subject in subjectsInCurriculum)
+                {
+                    subject.CurriculumId = null;
+                    _context.Subjects.Update(subject);
+                    await _context.SaveChangesAsync();
+                }
+               
                 _context.Curriculums.Remove(curriculum);
+                await _context.SaveChangesAsync();
             }
 
-            await _context.SaveChangesAsync();
+            
             return RedirectToAction(nameof(Index));
         }
     }

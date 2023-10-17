@@ -1,0 +1,58 @@
+﻿@model School.Models.Subject
+
+@{
+    ViewData["Title"] = "Krijo Lende";
+    var curriculums = ViewBag.Curriculums as List<Curriculum>;
+}
+
+<h1>Krijo</h1>
+
+<h4>Lenda</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Emri</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Author" class="control-label">Autori</label>
+                <input asp-for="Author" class="form-control" />
+                <span asp-validation-for="Author" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Type" class="control-label">Lloji</label>
+                <input asp-for="Type" class="form-control" />
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="curriculums">Zgjidh nje kurrikule:</label>
+
+                <select asp-for="CurriculumId" class="form-control" id="curriculums">
+
+                    @foreach (var item in curriculums)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="CurriculumId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Kthehu</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

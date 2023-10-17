@@ -1,0 +1,42 @@
+﻿@model School.Models.Subject
+
+@{
+    ViewData["Title"] = "Detajet";
+}
+
+<h1>Detajet e @Model.Name</h1>
+
+<div>
+    <h4>Kurrikula</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Emri
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Name
+        </dd>
+        <dt class="col-sm-2">
+            Autori
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Author
+        </dd>
+        <dt class="col-sm-2">
+            Lloji
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Type
+        </dd>
+        <dt class="col-sm-2">
+            Kurrikula
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Curriculum.Name
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
