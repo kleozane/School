@@ -32,7 +32,13 @@
             Kurrikula
         </dt>
         <dd class="col-sm-10">
-            @Model.Curriculum.Name
+            @if(Model.Curriculum != null)
+            {
+                <p>@Model.Curriculum.Name</p>
+            }else
+            {
+                <p>Nuk ka kurrikul</p>
+            }
         </dd>
     </dl>
 </div>
