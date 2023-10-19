@@ -1,18 +1,19 @@
 ﻿@model School.Models.Subject
 
 @{
-    ViewData["Title"] = "Krijo Lende";
+    ViewData["Title"] = "Ndrysho";
     var curriculums = ViewBag.Curriculums as List<Curriculum>;
 }
 
-<h1>Krijo</h1>
+<h1>Ndrysho</h1>
 
 <h4>Lenda</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Name" class="control-label">Emri</label>
                 <input asp-for="Name" class="form-control" />
@@ -24,7 +25,7 @@
                 <span asp-validation-for="Author" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Type" class="control-label">Lloji</label>
+                <label asp-for="Type" class="control-label"></label>
                 <input asp-for="Type" class="form-control" />
                 <span asp-validation-for="Type" class="text-danger"></span>
             </div>
@@ -35,13 +36,14 @@
                     <option value="">Zgjidh nje Kurrikule</option>
                     @foreach (var item in curriculums)
                     {
-                        <option value="@item.Id">@item.Name</option>
+                        var isSelected = Model.CurriculumId == item.Id; 
+                        <option selected="@isSelected" value="@item.Id">@item.Name</option>
                     }
                 </select>
                 <span asp-validation-for="CurriculumId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>

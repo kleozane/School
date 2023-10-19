@@ -65,12 +65,14 @@ namespace School.Controllers
             }
 
             var subject = await _context.Subjects.FindAsync(id);
+            var curriculums = _context.Curriculums.ToList();
+            ViewBag.Curriculums = curriculums;
             return View(subject);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Author,Type")] Subject subject)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Author,Type,CurriculumId")] Subject subject)
         {
             if (id != subject.Id)
             {
