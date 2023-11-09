@@ -17,5 +17,6 @@ namespace School.Data
         public DbSet<School.Models.Teacher> Teacher { get; set; } = default!;
         public DbSet<School.Models.Curriculum> Curriculums { get; set; } = default!;
         public DbSet<School.Models.Subject> Subjects { get; set; } = default!;
+        public DbSet<School.Models.Student> Students { get; set; } = default!;
     }
-}
+}  

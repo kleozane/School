@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Kreu i Lendes";
+    var curriculums = ViewBag.Curriculums as List<Curriculum>;
 }
 
 <h1>Lendet</h1>
@@ -9,6 +10,22 @@
 <p>
     <a asp-action="Create">Krijo te Ri</a>
 </p>
+
+<form asp-controller="Subject">
+    <label>Kerko</label>
+    <input type="text" name="filter" />
+
+    <label>Kurrikulat</label>
+    <select class="form-control" id="curriculums" name="kurrikulaId">
+        <option value="">Zgjidh nje Kurrikule</option>
+        @foreach (var item in curriculums)
+        {
+            <option value="@item.Id">@item.Name</option>
+        }
+    </select>
+    <button type="submit" asp-action="Index">Kerko Tani</button>
+</form>
+    
 <table class="table">
     <thead>
         <tr>

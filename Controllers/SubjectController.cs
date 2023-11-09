@@ -15,11 +15,31 @@ namespace School.Controllers
         }
 
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string filter, int kurrikulaId)
         {
             if (_context.Subjects != null)
             {
-                return View(await _context.Subjects.Include(x => x.Curriculum).ToListAsync());
+                var curriculums = _context.Curriculums.ToList();
+                ViewBag.Curriculums = curriculums;
+                if (filter != null && kurrikulaId != 0)
+                {
+                    var subjects = await _context.Subjects.Where(x => x.Name.StartsWith(filter)).Where(a => a.CurriculumId == kurrikulaId).Include(x => x.Curriculum).ToListAsync();
+                    return View(subjects);
+                }
+                else if (filter == null && kurrikulaId != 0)
+                {
+                    var subjects = await _context.Subjects.Where(a => a.CurriculumId == kurrikulaId).Include(x => x.Curriculum).ToListAsync();
+                    return View(subjects);
+                }
+                else if (filter != null && kurrikulaId == 0)
+                {
+                    var subjects = await _context.Subjects.Where(x => x.Name.StartsWith(filter)).Include(x => x.Curriculum).ToListAsync();
+                    return View(subjects);
+                }
+                else
+                {
+                    return View(await _context.Subjects.Include(x => x.Curriculum).ToListAsync());
+                }
             }
             else
             {
